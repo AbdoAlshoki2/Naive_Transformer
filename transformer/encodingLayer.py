@@ -3,8 +3,14 @@ import torch.nn as nn
 import math
 
 class PositionalEncoding(nn.Module):
-    def __init__(self, in_dim: int, max_len: int = 5000):
+    """
+    Implements the standard positional encoding as described in 'Attention Is All You Need'.
 
+    Args:
+        in_dim (int): Embedding dimension.
+        max_len (int, optional): Maximum sequence length.
+    """
+    def __init__(self, in_dim: int, max_len: int = 5000):
         super().__init__()
         
 
@@ -25,6 +31,14 @@ class PositionalEncoding(nn.Module):
         return x + self.pe[:seq_len, :].unsqueeze(0)
 
 class EmbeddingLayer(nn.Module):
+    """
+    Token embedding layer with positional encoding.
+
+    Args:
+        vocab_size (int): Vocabulary size.
+        in_dim (int): Embedding dimension.
+        max_len (int, optional): Maximum sequence length.
+    """
     def __init__(self, vocab_size: int, in_dim: int, max_len:int=5000):
         super().__init__()
 
