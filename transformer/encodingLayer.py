@@ -12,7 +12,9 @@ class PositionalEncoding(nn.Module):
     """
     def __init__(self, in_dim: int, max_len: int = 5000):
         super().__init__()
-        
+
+        if in_dim % 2:
+            raise ValueError(f"expected the in_dim to be even number, but got {in_dim}.")
 
         position = torch.arange(max_len).unsqueeze(1).float()
         div_term = torch.exp(torch.arange(0, in_dim, 2).float() * (-math.log(10000.0) / in_dim))
