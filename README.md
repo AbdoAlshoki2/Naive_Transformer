@@ -9,12 +9,14 @@ This repository contains an educational implementation of the Transformer archit
   - `transformer.py`: Implements the main Transformer model, including encoder and decoder layers, multi-head attention, feed-forward networks, and supporting classes.
   - `encodingLayer.py`: Provides token embedding and positional encoding layers, essential for injecting sequence order information into the model.
   - `__init__.py`: Allows easy import of the main classes.
+  - `analysis.py`: Contains utilities for visualizing attention patterns and analyzing model behavior.
 
 ## Features
 
 - Modular and readable PyTorch code.
 - Implements all key components of the original Transformer architecture.
 - Designed for educational purposes, with docstrings and comments for clarity.
+- Visualization tools for attention mechanisms to aid understanding.
 
 ## Getting Started
 
@@ -40,5 +42,25 @@ model = Transformer(
     num_decoder_layers=num_decoder_layers,
     decoder_head_size=decoder_head_size,
     vocab_size=vocab_size
+)
+```
+
+## Visualization
+The analysis.py module provides tools to visualize attention patterns:
+```python
+from transformer import plot_attention_scores
+import torch
+
+# After running a forward pass with your model
+plot_attention_scores(
+    transformer=model,
+    tokenizer=tokenizer,
+    encoder_input_ids=encoder_input,
+    decoder_input_ids=decoder_input,
+    layer_type="decoder", # or encoder, cross
+    layer_index=0,
+    head_index=None, # None to plot all heads 
+    truncate_pad=True,
+    cmap="plasma"  # any cmap from matplotlib       
 )
 ```

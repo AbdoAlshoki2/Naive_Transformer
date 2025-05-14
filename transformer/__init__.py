@@ -1,2 +1,3 @@
 from encodingLayer import EmbeddingLayer
 from transformer import Transformer
+from analysis import plot_attention_scores
